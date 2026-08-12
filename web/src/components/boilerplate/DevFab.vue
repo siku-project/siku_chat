@@ -2,6 +2,7 @@
 import { version as vueVersion } from 'vue'
 import { ref } from 'vue'
 import axios from 'axios'
+import IcePanel from '@/components/ui/IcePanel.vue'
 
 defineProps<{
   currentView: string
@@ -22,48 +23,45 @@ const deps = [
 
 <template>
   <div
-    class="fixed top-4 right-4 z-50"
+    class="fixed top-7 right-7 z-50"
     @mouseenter="expanded = true"
     @mouseleave="expanded = false"
   >
-    <div
-      class="overflow-hidden transition-all duration-300 ease-in-out bg-zinc-950/85 backdrop-blur-xl border border-emerald-500/30 shadow-[0_8px_32px_rgba(0,0,0,0.6)]"
-      :class="expanded ? 'w-56 rounded-2xl' : 'w-12 h-12 rounded-full'"
+    <IcePanel
+      variant="secondary"
+      :circle="!expanded"
+      interactive
+      class="overflow-hidden transition-all duration-500 ease-out"
+      :class="expanded ? 'w-64' : 'h-12 w-12'"
     >
-      <div v-if="!expanded" class="w-12 h-12 flex items-center justify-center">
-        <v-icon class="text-emerald-500" size="20">mdi-code-tags</v-icon>
+      <div v-if="!expanded" class="flex h-12 w-12 items-center justify-center">
+        <v-icon class="text-glacier-100/55" size="17">mdi-code-tags</v-icon>
       </div>
 
-      <div v-else class="p-4 flex flex-col gap-3">
-        <span class="text-emerald-500 font-semibold text-sm tracking-wide text-center">{{
-          resourceName
-        }}</span>
+      <div v-else class="flex flex-col gap-4 p-6">
+        <span class="ice-title text-center text-[10px]">{{ resourceName }}</span>
 
-        <div
-          class="w-full h-0.5 bg-gradient-to-r from-transparent via-emerald-700 to-transparent"
-        ></div>
+        <div class="ice-divider h-px w-full"></div>
 
-        <div class="flex flex-col gap-1.5">
+        <div class="flex flex-col gap-2.5">
           <div v-for="dep in deps" :key="dep.name" class="flex items-center justify-between">
-            <span class="text-zinc-400 text-xs">{{ dep.name }}</span>
-            <span class="text-emerald-500/70 text-xs font-mono">{{ dep.version }}</span>
+            <span class="text-xs font-light tracking-wide text-glacier-200/45">{{ dep.name }}</span>
+            <span class="font-mono text-[11px] text-glacier-100/70">{{ dep.version }}</span>
           </div>
         </div>
 
-        <div
-          class="w-full h-0.5 bg-gradient-to-r from-transparent via-emerald-700 to-transparent"
-        ></div>
+        <div class="ice-divider h-px w-full"></div>
 
         <div class="flex items-center justify-between">
-          <span class="text-zinc-400 text-xs">Vue actuelle</span>
+          <span class="text-xs font-light tracking-wide text-glacier-200/45">View</span>
           <span
-            class="text-xs font-medium"
-            :class="currentView !== 'none' ? 'text-emerald-400' : 'text-red-400/70'"
+            class="text-xs font-light"
+            :class="currentView !== 'none' ? 'text-glacier-200/85' : 'text-glacier-300/25'"
           >
             {{ currentView !== 'none' ? currentView : 'None' }}
           </span>
         </div>
       </div>
-    </div>
+    </IcePanel>
   </div>
 </template>
