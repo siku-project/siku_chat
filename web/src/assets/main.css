@@ -2,3 +2,42 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@property --ice-top {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0.5;
+}
+
+@property --ice-bottom {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0.63;
+}
+
+@property --ice-glow {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0.13;
+}
+
+@layer base {
+  html,
+  body,
+  #app,
+  .v-application,
+  .v-application__wrap {
+    background: transparent !important;
+  }
+}
+
+@layer components {
+  .ice-divider {
+    background: linear-gradient(to bottom, transparent, rgba(214, 232, 246, 0.16), transparent);
+  }
+
+  .ice-title {
+    @apply font-light uppercase text-glacier-50;
+    letter-spacing: 0.24em;
+  }
+}
