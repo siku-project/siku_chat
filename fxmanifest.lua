@@ -3,20 +3,41 @@ game 'gta5'
 
 author 'Chaos Studio'
 description 'A modern, modular and high-performance chat system for the SIKU ecosystem. Built with clean architecture, seamless UI integration, scalability, and immersive roleplay communication in mind.'
-version '0.0.1'
+version '1.0.0'
 
 name 'siku_chat'
 
 lua54 'yes'
 
-shared_scripts {}
+shared_scripts {
+  '@siku_core/init.lua',
+  'config/chat.lua',
+  'config/history.lua',
+  'config/keybinds.lua',
+  'config/passive.lua',
+  'config/translation.lua',
+  'shared/utils/locale.lua',
+  'shared/utils/normalize.lua',
+}
 
-server_scripts {}
+server_scripts {
+  'server/modules/hooks.lua',
+  'server/modules/suggestions.lua',
+  'server/modules/staff.lua',
+  'server/main.lua',
+}
 
-client_scripts {}
+client_scripts {
+  'client/main.lua',
+}
 
-ui_page ''
+ui_page 'web/dist/index.html'
 
-files {}
+files {
+  'translations/*.lua',
+  'web/dist/**/*',
+}
 
-dependencies {}
+dependencies {
+  'siku_core',
+}
