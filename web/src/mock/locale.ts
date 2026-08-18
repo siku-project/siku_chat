@@ -7,6 +7,7 @@ export const DEV_MESSAGES: Record<string, Record<string, string>> = {
     chat_placeholder: 'Écrire un message…',
     chat_staff_placeholder: 'Message au staff…',
     chat_command: 'Commande : {command}',
+    chat_empty: 'Aucun message',
   },
   en: {
     chat_title: 'Chat',
@@ -16,5 +17,6 @@ export const DEV_MESSAGES: Record<string, Record<string, string>> = {
     chat_placeholder: 'Type a message…',
     chat_staff_placeholder: 'Message the staff…',
     chat_command: 'Command: {command}',
+    chat_empty: 'No messages',
   },
 }

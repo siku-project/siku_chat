@@ -235,9 +235,7 @@ const send = (): void => {
     startCooldown()
   }
 
-  if (!import.meta.env.DEV) {
-    closeChat()
-  }
+  inputRef.value?.focus()
 }
 
 const onSubmit = (): void => {
