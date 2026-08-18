@@ -4,6 +4,7 @@ return {
   chat_staff_badge = 'Staff mode',
   chat_staff_hint = 'Esc to go back',
   chat_placeholder = 'Type a message…',
+  chat_empty = 'No messages',
   chat_staff_placeholder = 'Message the staff…',
   chat_command = 'Command: {command}',
   chat_staffchat_description = 'Join the staff channel.',
