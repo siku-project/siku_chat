@@ -59,16 +59,18 @@ onMounted(refreshView)
     <span ref="probeRef" class="name-probe" aria-hidden="true"></span>
 
     <div ref="scrollRef" class="msg-scroll" :class="{ 'is-scrolled': scrolled }" @scroll="onScroll">
-      <div v-if="messages.length === 0" class="msg-empty">{{ t('chat_empty') }}</div>
-      <TransitionGroup
-        v-else
-        name="msg"
-        tag="div"
-        class="msg-well"
-        :style="{ '--name-col': nameColPx + 'px' }"
-      >
-        <ChatMessage v-for="message in messages" :key="message.id" :message="message" />
-      </TransitionGroup>
+      <div class="msg-anchor">
+        <div v-if="messages.length === 0" class="msg-empty">{{ t('chat_empty') }}</div>
+        <TransitionGroup
+          v-else
+          name="msg"
+          tag="div"
+          class="msg-well"
+          :style="{ '--name-col': nameColPx + 'px' }"
+        >
+          <ChatMessage v-for="message in messages" :key="message.id" :message="message" />
+        </TransitionGroup>
+      </div>
     </div>
   </div>
 </template>
@@ -84,10 +86,17 @@ onMounted(refreshView)
 }
 
 .msg-scroll {
-  max-height: 13rem;
+  height: 13rem;
   overflow-y: auto;
   overscroll-behavior: contain;
   scrollbar-width: none;
+}
+
+.msg-anchor {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .msg-scroll.is-scrolled {
@@ -110,9 +119,9 @@ onMounted(refreshView)
 
 .msg-empty {
   display: flex;
+  flex: 1;
   align-items: center;
   justify-content: center;
-  height: 13rem;
   font-size: 12px;
   letter-spacing: 0.08em;
   color: rgba(226, 240, 250, 0.32);
