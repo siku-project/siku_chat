@@ -115,23 +115,6 @@ local function sendConfig()
   })
 end
 
----Loads the full translation table for the active language.
----@return table<string, string>
-local function loadTranslations()
-  local file <const> =
-    LoadResourceFile(GetCurrentResourceName(), ('translations/%s.lua'):format(TranslationConfig.language))
-  if not file then
-    return {}
-  end
-
-  local fn <const> = load(file)
-  if not fn then
-    return {}
-  end
-
-  return fn() or {}
-end
-
 ---Pushes the active language and its translations to the NUI.
 ---@return nil
 local function sendLocale()
@@ -139,7 +122,7 @@ local function sendLocale()
     action = 'siku_chat:nui:setLocale',
     locale = {
       language = TranslationConfig.language,
-      translations = loadTranslations(),
+      translations = Siku.locale.translations(),
     },
   })
 end
@@ -174,7 +157,7 @@ local function togglePassive()
 
   local enabled <const> = passiveMode == 'dynamic'
 
-  Siku.Notification({
+  Siku.notification.show({
     type = 'info',
     title = T('chat_title'),
     description = enabled and T('chat_passive_enabled') or T('chat_passive_disabled'),
