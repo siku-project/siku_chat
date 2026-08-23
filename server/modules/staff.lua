@@ -89,7 +89,7 @@ local function broadcastToStaff(message)
   end
 end
 
-Siku.RegisterCommand('staffchat', function(src)
+Siku.command.register('staffchat', function(src)
   TriggerClientEvent('siku_chat:client:setStaffMode', src, true)
 end, {
   description = T('chat_staffchat_description'),

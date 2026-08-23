@@ -16,7 +16,6 @@ shared_scripts {
   'config/keybinds.lua',
   'config/passive.lua',
   'config/translation.lua',
-  'shared/utils/locale.lua',
   'shared/utils/normalize.lua',
 }
 

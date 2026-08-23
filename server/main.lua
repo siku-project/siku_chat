@@ -208,8 +208,8 @@ RegisterNetEvent('siku_chat:server:ready', function()
 
   readyStamps[src] = time
 
-  if type(Siku.GetCommandSuggestions) == 'function' then
-    for _, suggestion in ipairs(Siku.GetCommandSuggestions(src)) do
+  if type(Siku.command.getSuggestions) == 'function' then
+    for _, suggestion in ipairs(Siku.command.getSuggestions(src)) do
       ChatSuggestions.Add(src, suggestion)
     end
   end
