@@ -229,9 +229,11 @@ const send = (): void => {
         return
       }
       dispatchCommand(command)
-    } else {
-      dispatchMessage(text)
+      startCooldown()
+      close()
+      return
     }
+    dispatchMessage(text)
     startCooldown()
   }
 
