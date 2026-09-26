@@ -74,6 +74,7 @@ watch(
   overflow-y: auto;
   overscroll-behavior: contain;
   scrollbar-width: none;
+  border-radius: inherit;
 }
 
 .cmd-list::-webkit-scrollbar {
