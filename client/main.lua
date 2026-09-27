@@ -40,9 +40,20 @@ local COMMAND_PREFIX <const> = getCommandPrefix()
 ---@param data table The message data: content, and optionally type, author, icon, channel, metadata.
 ---@return boolean shown Whether the message was accepted.
 local function addMessage(data)
+  if type(data) == 'table' and data.type ~= nil and not ChatNormalize.IsValidType(data.type) then
+    Siku.print.error(('AddMessage: invalid type %q'):format(tostring(data.type)))
+    return false
+  end
+
+  if type(data) == 'table' and data.channel == ChatNormalize.STAFF_CHANNEL then
+    Siku.print.error('AddMessage: the staff channel only carries staff messages, use the staff flow')
+    return false
+  end
+
   local message <const> = ChatNormalize.Message(data)
 
   if not message then
+    Siku.print.error('AddMessage: data.content must be a non-empty string')
     return false
   end
 
@@ -55,9 +66,11 @@ local function addMessage(data)
 end
 
 ---Clears every message from the chat.
----@return nil
+---@return boolean cleared Always true, the clear is always dispatched.
 local function clear()
   SendNUIMessage({ action = 'siku_chat:nui:clear' })
+
+  return true
 end
 
 ---Registers a command suggestion in the chat.
@@ -67,6 +80,7 @@ local function addSuggestion(data)
   local suggestion <const> = ChatNormalize.Suggestion(data, COMMAND_PREFIX)
 
   if not suggestion then
+    Siku.print.error('AddSuggestion: data.name must be a non-empty string')
     return false
   end
 
@@ -83,6 +97,7 @@ end
 ---@return boolean removed Whether the removal was accepted.
 local function removeSuggestion(name)
   if type(name) ~= 'string' or #name == 0 then
+    Siku.print.error('RemoveSuggestion: name must be a non-empty string')
     return false
   end
 
