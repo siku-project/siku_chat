@@ -60,6 +60,11 @@ local function addMessage(target, data)
     return false
   end
 
+  if type(data) == 'table' and data.channel == ChatNormalize.STAFF_CHANNEL then
+    Siku.print.error('AddMessage: the staff channel only carries staff messages, use the staff flow')
+    return false
+  end
+
   local message <const> = ChatNormalize.Message(data)
 
   if not message then
