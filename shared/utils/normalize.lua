@@ -15,6 +15,8 @@ local ICON_PATTERN <const> = '^mdi%-[%w%-]+$'
 
 ChatNormalize = {}
 
+ChatNormalize.STAFF_CHANNEL = 'staff'
+
 ---Checks whether the given value is a valid public message type.
 ---@param value any
 ---@return boolean valid

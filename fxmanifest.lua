@@ -3,7 +3,7 @@ game 'gta5'
 
 author 'Siku Studio'
 description 'A modern, modular and high-performance chat system for the SIKU ecosystem. Built with clean architecture, seamless UI integration, scalability, and immersive roleplay communication in mind.'
-version '1.0.0'
+version '1.0.1'
 
 name 'siku_chat'
 
