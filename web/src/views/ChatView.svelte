@@ -2,6 +2,7 @@
   import { tick } from 'svelte'
   import { fly } from 'svelte/transition'
   import { Divider, Hint, Surface } from '@siku/ui'
+  import ChatAnchor from '@/components/chat/ChatAnchor.svelte'
   import ChatHeader from '@/components/chat/ChatHeader.svelte'
   import ChatInput from '@/components/chat/ChatInput.svelte'
   import ChatMessages from '@/components/chat/ChatMessages.svelte'
@@ -185,38 +186,45 @@
 <ChatPassive />
 
 {#if store.visible}
-  <div class="chat-shell" class:is-staff={staff} transition:fly={{ y: 8, duration: 200 }}>
-    <Surface elevated padding="none" class="chat-panel">
-      <ChatHeader {staff} />
-      <Divider />
-      <ChatMessages messages={store.visibleMessages} />
-      <div class="chat-compose">
-        <ChatInput
-          bind:this={input}
-          bind:value={draft}
-          placeholder={staff ? m.chat_staff_placeholder() : m.chat_placeholder()}
-          maxLength={store.config.maxMessageLength}
-          mouse={!keyboard}
-          {canSend}
-          {help}
-          sendLabel={m.chat_send()}
-          onkeydown={onKeydown}
-          oninput={onInput}
-          onfocus={() => (active = true)}
-          onblur={() => (active = false)}
-          onsend={send}
-        />
-        {#if keyboard}
-          <div class="chat-hints">
-            <Hint keys={['Entrée']} label={m.chat_send()} />
-            <Hint keys={['↑', '↓']} label={m.chat_history()} />
-          </div>
-        {/if}
-      </div>
-    </Surface>
+  <ChatAnchor position={store.config.position} interactive>
+    <div
+      class="chat-shell"
+      class:is-staff={staff}
+      class:is-bottom={store.config.position.startsWith('bottom')}
+      transition:fly={{ y: 8, duration: 200 }}
+    >
+      <Surface elevated padding="none" class="chat-panel">
+        <ChatHeader {staff} />
+        <Divider />
+        <ChatMessages messages={store.visibleMessages} />
+        <div class="chat-compose">
+          <ChatInput
+            bind:this={input}
+            bind:value={draft}
+            placeholder={staff ? m.chat_staff_placeholder() : m.chat_placeholder()}
+            maxLength={store.config.maxMessageLength}
+            mouse={!keyboard}
+            {canSend}
+            {help}
+            sendLabel={m.chat_send()}
+            onkeydown={onKeydown}
+            oninput={onInput}
+            onfocus={() => (active = true)}
+            onblur={() => (active = false)}
+            onsend={send}
+          />
+          {#if keyboard}
+            <div class="chat-hints">
+              <Hint keys={['Entrée']} label={m.chat_send()} />
+              <Hint keys={['↑', '↓']} label={m.chat_history()} />
+            </div>
+          {/if}
+        </div>
+      </Surface>
 
-    {#if suggestions.length > 0}
-      <ChatSuggestions {suggestions} {prefix} {selected} {keyboard} onselect={complete} />
-    {/if}
-  </div>
+      {#if suggestions.length > 0}
+        <ChatSuggestions {suggestions} {prefix} {selected} {keyboard} onselect={complete} />
+      {/if}
+    </div>
+  </ChatAnchor>
 {/if}

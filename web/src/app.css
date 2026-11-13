@@ -2,16 +2,69 @@
 @tailwind components;
 @tailwind utilities;
 
-.chat-shell {
+.chat-anchor {
   position: fixed;
-  top: calc(var(--safe-y) + var(--space-12));
-  left: calc(var(--safe-x) + var(--space-12));
+  z-index: var(--z-hud);
+  display: grid;
+  inset: calc(var(--safe-y) + var(--space-12)) calc(var(--safe-x) + var(--space-12));
+  pointer-events: none;
+}
+
+.chat-anchor.is-interactive {
   z-index: var(--z-panel);
+}
+
+.chat-anchor.is-interactive > * {
+  pointer-events: auto;
+}
+
+.chat-anchor--top-left {
+  place-items: start start;
+}
+
+.chat-anchor--top-center {
+  place-items: start center;
+}
+
+.chat-anchor--top-right {
+  place-items: start end;
+}
+
+.chat-anchor--left {
+  place-items: center start;
+}
+
+.chat-anchor--center {
+  place-items: center center;
+}
+
+.chat-anchor--right {
+  place-items: center end;
+}
+
+.chat-anchor--bottom-left {
+  place-items: end start;
+}
+
+.chat-anchor--bottom-center {
+  place-items: end center;
+}
+
+.chat-anchor--bottom-right {
+  place-items: end end;
+}
+
+.chat-shell {
   display: flex;
   width: 36rem;
-  max-width: calc(100vw - 2 * (var(--safe-x) + var(--space-12)));
+  max-width: 100%;
   flex-direction: column;
   gap: var(--space-2);
+  text-align: left;
+}
+
+.chat-shell.is-bottom {
+  flex-direction: column-reverse;
 }
 
 html[data-density='compact'] .chat-shell {
@@ -233,6 +286,18 @@ html[data-density='compact'] .chat-log {
   max-width: calc(100vw - 2 * (var(--safe-x) + var(--space-12)));
   flex-direction: column;
   gap: var(--space-1);
+}
+
+.chat-passive--top-center,
+.chat-passive--center,
+.chat-passive--bottom-center {
+  text-align: center;
+}
+
+.chat-passive--top-right,
+.chat-passive--right,
+.chat-passive--bottom-right {
+  text-align: right;
 }
 
 .chat-passive__row {

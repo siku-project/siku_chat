@@ -1,7 +1,8 @@
 <script lang="ts">
-  import { Button, Modal, Segmented, Tooltip } from '@siku/ui'
+  import { Button, Modal, Segmented, Select, Tooltip } from '@siku/ui'
   import { simulateIncoming } from '@/lib/chat/mock'
   import { store } from '@/lib/chat/store.svelte'
+  import { isPosition, POSITIONS } from '@/lib/chat/types'
   import { locale } from '@/lib/locale.svelte'
 
   let open = $state(false)
@@ -9,6 +10,14 @@
   const languages = $derived(
     locale.all.map((language) => ({ value: language, label: language.toUpperCase() })),
   )
+
+  const positions = POSITIONS.map((position) => ({
+    value: position,
+    label: position
+      .split('-')
+      .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+      .join(' '),
+  }))
 </script>
 
 <Tooltip text="Simulation">
@@ -86,6 +95,13 @@
       />
     </div>
 
+    <Select
+      label="Chat position"
+      value={store.config.position}
+      options={positions}
+      onchange={(value) => isPosition(value) && store.setConfig({ position: value })}
+    />
+
     <div class="sk-field">
       <span class="sk-field__label">Passive overlay</span>
       <Segmented
@@ -99,6 +115,13 @@
         onchange={(value) => store.setConfig({ passiveEnabled: value === 'on' })}
       />
     </div>
+
+    <Select
+      label="Incoming messages position"
+      value={store.config.passivePosition}
+      options={positions}
+      onchange={(value) => isPosition(value) && store.setConfig({ passivePosition: value })}
+    />
 
     <div class="sk-field">
       <span class="sk-field__label">Language</span>
