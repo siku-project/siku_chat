@@ -12,6 +12,7 @@ return {
     ['chat_complete'] = 'Complete',
     ['chat_choose'] = 'Choose',
     ['chat_history'] = 'History',
+    ['chat_key_enter'] = 'Enter',
     ['chat_commands'] = 'Commands',
     ['chat_commands_only'] = 'Only commands go through here, start with {prefix}.',
     ['chat_rank_owner'] = 'Owner',
