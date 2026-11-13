@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Badge, Icon, icons, type IconName } from '@siku/ui'
   import type { ChatMessage, ChatMessageType } from '@/lib/chat/types'
+  import { VOICES } from '@/lib/chat/voices'
   import { m } from '@/lib/i18n.svelte'
   import { locale } from '@/lib/locale.svelte'
 
@@ -39,14 +40,15 @@
   )
 
   const icon = $derived(isIconName(message.icon) ? message.icon : TYPE_ICONS[message.type])
+  const voice = $derived(VOICES[message.type])
 </script>
 
 <div class="chat-row chat-row--{message.type}">
   <span class="chat-row__time t-caption">{time}</span>
 
-  {#if message.type === 'server'}
-    <Icon name="server" size="sm" class="chat-row__icon" />
-    <Badge tone="solid" label={m.chat_server_badge()} />
+  {#if voice}
+    <Icon name={voice.icon} size="sm" class="chat-row__icon" />
+    <Badge tone="live" label={voice.label()} />
     <span class="chat-row__text t-body-sm">{message.text}</span>
   {:else if message.author}
     {#if message.rank}

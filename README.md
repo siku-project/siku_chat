@@ -94,7 +94,7 @@ Keys are registered through the SIKU keybind library: players rebind them in the
 -- Show a message to one player (server id) or everyone (-1).
 exports.siku_chat:AddMessage(target, {
   content = 'Welcome to SIKU.',   -- required
-  type = 'info',                  -- 'server' | 'system' | 'info' | 'success' | 'warning' | 'error'
+  type = 'info',                  -- 'server' | 'staff' | 'system' | 'info' | 'success' | 'warning' | 'error'
   author = nil,                   -- optional display name
   icon = 'snowflake',             -- optional @siku/ui icon name
 })
@@ -113,7 +113,7 @@ exports.siku_chat:AddSuggestion(target, {
 exports.siku_chat:RemoveSuggestion(target, 'me')
 ```
 
-Resource messages always go to the public channel. The `server` type is the voice of the server: the line carries the server icon, a « Server » badge and white text, in the chat and in the incoming messages. Suggestions belong to the resource that registered them and are removed when it stops.
+Resource messages always go to the public channel. The `server` and `staff` types are voices: the line carries an icon (server, shield), a glacier badge (« Server », « Staff ») and white text, in the chat and in the incoming messages. Behind the incoming messages, a radial scrim rises from the edge of the screen at the chosen position so the text stays readable on bright scenes. Suggestions belong to the resource that registered them and are removed when it stops.
 
 ### Client exports
 
@@ -158,10 +158,10 @@ The cooldown only applies to messages: a command is never delayed, on the server
 
 | Command | Where | Effect |
 |---|---|---|
-| `announce <message>` | Server console only | Shows a `server` message, with the server icon and badge, in the chat of every player. It is kept for the replay like any public message. |
+| `/announce <message>` | `chat.announce`, and the server console | Shows an announcement to every player: a `staff` message with the shield icon and the Staff badge when a player sends it, a `server` message with the server icon and badge from the console. Kept for the replay like any public message. |
 | `/staffchat` | Players with `chat.staff.join` | Opens the chat in the staff channel. |
 
-`announce` carries the permission `chat.announce` so that players do not see its suggestion; a player who runs it anyway is refused and the attempt is recorded.
+Give `chat.announce` to the roles allowed to speak to everyone.
 
 ## Staff channel
 
@@ -174,7 +174,7 @@ The cooldown only applies to messages: a command is never delayed, on the server
 
 | Event | Level | When |
 |---|---|---|
-| `chat.message_rejected` | debug, warn for `staff_denied` and `console_only` | A message is refused: `reason` is `text_invalid`, `too_long`, `cooldown`, `hook`, `staff_denied` or `console_only`. |
+| `chat.message_rejected` | debug, warn for `staff_denied` | A message is refused: `reason` is `text_invalid`, `too_long`, `cooldown`, `hook` or `staff_denied`. |
 | `chat.export_invalid` | warn | A resource called an export with a wrong argument: `export` and `reason`. |
 | `chat.hook_rejected`, `chat.hook_failed` | warn, error | A hook registration is refused, or a hook raised. |
 | `chat.prefix_invalid` | warn | The configured prefix is not allowed and `/` is used. |
