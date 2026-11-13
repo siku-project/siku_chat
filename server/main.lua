@@ -1,5 +1,7 @@
 local EVERYONE <const> = -1
+local CONSOLE_SOURCE <const> = 0
 local READY_COOLDOWN_MS <const> = 5000
+local ERROR_NOTIFICATION_DURATION <const> = 5000
 
 local cooldowns <const> = {}
 local readyStamps <const> = {}
@@ -264,6 +266,40 @@ local function removeSuggestion(target, name)
 
   return ChatSuggestions.Remove(target, name)
 end
+
+Siku.command.register('announce', function(src, args)
+  if src ~= CONSOLE_SOURCE then
+    Siku.log.warn('chat.message_rejected', ('%s used /announce from the game, it only runs from the console'):format(GetPlayerName(tostring(src)) or src), {
+      channel = ChatNormalize.PUBLIC_CHANNEL,
+      reason = 'console_only',
+    }, { outcome = 'denied', entities = { playerEntity(src) } })
+    Siku.notification.show(src, {
+      type = 'error',
+      title = '/announce',
+      description = T('chat_announce_console_only'),
+      duration = ERROR_NOTIFICATION_DURATION,
+    })
+    return
+  end
+
+  local text <const> = ChatNormalize.Sanitize(ChatNormalize.Trim(args.message))
+  local length <const> = ChatNormalize.Length(text)
+
+  if not length or length == 0 or length > ChatConfig.maxMessageLength then
+    Siku.print.warn(('/announce: the message must hold 1 to %d characters'):format(ChatConfig.maxMessageLength))
+    return
+  end
+
+  addMessage(EVERYONE, { content = text, type = 'info', icon = 'server' })
+  Siku.print.info(('/announce: shown to everyone: %s'):format(text))
+end, {
+  description = T('chat_announce_description'),
+  permission = 'chat.announce',
+  allowConsole = true,
+  arguments = {
+    { name = 'message', type = 'merge', help = T('chat_announce_message_help') },
+  },
+})
 
 RegisterNetEvent('siku_chat:server:sendMessage', function(content)
   receive(source, content, ChatNormalize.PUBLIC_CHANNEL)
