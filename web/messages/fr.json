@@ -1,0 +1,6 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "app_close": "Fermer",
+  "app_hint": "Enregistrez vos vues dans BoilerplateView et construisez à partir d’ici.",
+  "app_title": "Interface {name}"
+}
