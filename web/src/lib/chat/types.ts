@@ -1,5 +1,13 @@
 export const CHANNELS = ['public', 'staff'] as const
-export const MESSAGE_TYPES = ['player', 'system', 'info', 'success', 'warning', 'error'] as const
+export const MESSAGE_TYPES = [
+  'player',
+  'server',
+  'system',
+  'info',
+  'success',
+  'warning',
+  'error',
+] as const
 export const INPUT_MODES = ['keyboard', 'mouse'] as const
 export const POSITIONS = [
   'top-left',

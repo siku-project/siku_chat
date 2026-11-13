@@ -103,6 +103,11 @@ export const DEMO_MESSAGES: ChatMessageInput[] = [
     text: 'Le serveur redémarre dans 30 minutes.',
   },
   {
+    type: 'server',
+    timestamp: at(21, 19),
+    text: 'Événement ce soir à 21 h 30 sur la place centrale.',
+  },
+  {
     type: 'player',
     timestamp: at(21, 20),
     author: 'Tom Rivera',
@@ -153,6 +158,7 @@ const INCOMING = [
   { author: 'Tom Rivera', text: 'Je passe au marché, besoin de rien ?' },
   { author: 'Noah Bennett', text: 'Rendez-vous au spot dans 5 minutes.' },
   { author: 'Camille Laurent', text: 'J’arrive, deux minutes !' },
+  { type: 'server', text: 'Redémarrage du serveur dans 10 minutes.' },
 ]
 
 let incomingIndex = 0
@@ -164,7 +170,7 @@ export const simulateIncoming = (): void => {
   incomingIndex += 1
 
   if (entry) {
-    store.addMessage({ type: 'player', author: entry.author, text: entry.text })
+    store.addMessage({ type: entry.type ?? 'player', author: entry.author, text: entry.text })
   }
 }
 

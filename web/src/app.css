@@ -180,6 +180,11 @@ html[data-density='compact'] .chat-log {
   color: var(--fg-secondary);
 }
 
+.chat-row--server .chat-row__icon,
+.chat-row--server .chat-row__text {
+  color: var(--fg-primary);
+}
+
 .chat-compose {
   display: flex;
   flex-direction: column;
@@ -315,4 +320,33 @@ html[data-density='compact'] .chat-log {
 
 .chat-passive__system {
   color: var(--fg-tertiary);
+}
+
+.chat-passive__row--server {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.chat-passive--top-center .chat-passive__row--server,
+.chat-passive--center .chat-passive__row--server,
+.chat-passive--bottom-center .chat-passive__row--server {
+  justify-content: center;
+}
+
+.chat-passive--top-right .chat-passive__row--server,
+.chat-passive--right .chat-passive__row--server,
+.chat-passive--bottom-right .chat-passive__row--server {
+  justify-content: flex-end;
+}
+
+.chat-passive__icon {
+  flex-shrink: 0;
+  align-self: center;
+  color: var(--fg-primary);
+}
+
+.chat-passive__server {
+  color: var(--fg-primary);
+  font-weight: 600;
 }

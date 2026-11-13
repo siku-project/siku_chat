@@ -44,7 +44,11 @@
 <div class="chat-row chat-row--{message.type}">
   <span class="chat-row__time t-caption">{time}</span>
 
-  {#if message.author}
+  {#if message.type === 'server'}
+    <Icon name="server" size="sm" class="chat-row__icon" />
+    <Badge tone="solid" label={m.chat_server_badge()} />
+    <span class="chat-row__text t-body-sm">{message.text}</span>
+  {:else if message.author}
     {#if message.rank}
       <Badge
         tone={RANK_TONES[message.rank] ?? 'neutral'}

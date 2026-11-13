@@ -94,7 +94,7 @@ Keys are registered through the SIKU keybind library: players rebind them in the
 -- Show a message to one player (server id) or everyone (-1).
 exports.siku_chat:AddMessage(target, {
   content = 'Welcome to SIKU.',   -- required
-  type = 'info',                  -- 'system' | 'info' | 'success' | 'warning' | 'error'
+  type = 'info',                  -- 'server' | 'system' | 'info' | 'success' | 'warning' | 'error'
   author = nil,                   -- optional display name
   icon = 'snowflake',             -- optional @siku/ui icon name
 })
@@ -113,7 +113,7 @@ exports.siku_chat:AddSuggestion(target, {
 exports.siku_chat:RemoveSuggestion(target, 'me')
 ```
 
-Resource messages always go to the public channel. Suggestions belong to the resource that registered them and are removed when it stops.
+Resource messages always go to the public channel. The `server` type is the voice of the server: the line carries the server icon, a « Server » badge and white text, in the chat and in the incoming messages. Suggestions belong to the resource that registered them and are removed when it stops.
 
 ### Client exports
 
@@ -158,7 +158,7 @@ The cooldown only applies to messages: a command is never delayed, on the server
 
 | Command | Where | Effect |
 |---|---|---|
-| `announce <message>` | Server console only | Shows a server message, as an `info` line with the server icon, in the chat of every player. It is kept for the replay like any public message. |
+| `announce <message>` | Server console only | Shows a `server` message, with the server icon and badge, in the chat of every player. It is kept for the replay like any public message. |
 | `/staffchat` | Players with `chat.staff.join` | Opens the chat in the staff channel. |
 
 `announce` carries the permission `chat.announce` so that players do not see its suggestion; a player who runs it anyway is refused and the attempt is recorded.
