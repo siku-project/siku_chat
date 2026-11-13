@@ -34,8 +34,8 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     emptyOutDir: true,
-    target: 'chrome103',
-    cssTarget: 'chrome103',
+    target: 'chrome144',
+    cssTarget: 'chrome144',
     assetsInlineLimit: 0,
   },
   test: {
