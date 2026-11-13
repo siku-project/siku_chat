@@ -4,30 +4,32 @@ import { locale } from './locale.svelte'
 
 describe('i18n', () => {
   it('serves the compiled message when the game sent nothing', () => {
-    expect(m.app_close()).toBe('Fermer')
+    expect(m.chat_close()).toBe('Fermer')
   })
 
   it('prefers the string the game pushed for the running language', () => {
-    applyTranslations(locale.current, { app_close: 'Quitter' })
+    applyTranslations(locale.current, { chat_close: 'Quitter' })
 
-    expect(m.app_close()).toBe('Quitter')
+    expect(m.chat_close()).toBe('Quitter')
   })
 
   it('fills placeholders in a pushed string', () => {
-    applyTranslations(locale.current, { app_title: 'Interface {name}' })
+    applyTranslations(locale.current, {
+      chat_commands_only: 'Commandes seulement, préfixe {prefix}',
+    })
 
-    expect(m.app_title({ name: 'demo' })).toBe('Interface demo')
+    expect(m.chat_commands_only({ prefix: '!' })).toBe('Commandes seulement, préfixe !')
   })
 
   it('reads a message by runtime key', () => {
-    expect(tr('app_hint')).toBe(m.app_hint())
+    expect(tr('chat_empty')).toBe(m.chat_empty())
   })
 
   it('switches the language along with the strings', () => {
-    applyTranslations('en', { app_close: 'Leave' })
+    applyTranslations('en', { chat_close: 'Leave' })
 
     expect(locale.current).toBe('en')
-    expect(m.app_close()).toBe('Leave')
-    expect(m.app_hint()).toBe('Register your views in BoilerplateView and build from here.')
+    expect(m.chat_close()).toBe('Leave')
+    expect(m.chat_empty()).toBe('No messages yet.')
   })
 })
