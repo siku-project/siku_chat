@@ -1,4 +1,11 @@
 return {
+  chat_notification_title = 'Chat',
+  chat_passive_enabled = 'Messages entrants affichés.',
+  chat_passive_disabled = 'Messages entrants masqués.',
+  chat_staffchat_description = 'Rejoindre le canal staff.',
+  chat_keybind_open = 'Ouvrir le chat',
+  chat_keybind_passive = 'Afficher ou masquer les messages entrants',
+
   web = {
     ['chat_title'] = 'Chat',
     ['chat_staff_title'] = 'Canal staff',
