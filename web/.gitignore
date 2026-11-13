@@ -27,3 +27,4 @@ dist-ssr
 
 # Paraglide compiles the messages here at build time
 src/paraglide
+project.inlang/cache
