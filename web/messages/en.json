@@ -1,8 +1,6 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
-  "chat_back": "Back to the chat",
   "chat_choose": "Choose",
-  "chat_close": "Close",
   "chat_commands": "Commands",
   "chat_commands_only": "Only commands go through here, start with {prefix}.",
   "chat_complete": "Complete",

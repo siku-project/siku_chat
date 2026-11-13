@@ -4,13 +4,13 @@ import { locale } from './locale.svelte'
 
 describe('i18n', () => {
   it('serves the compiled message when the game sent nothing', () => {
-    expect(m.chat_close()).toBe('Fermer')
+    expect(m.chat_send()).toBe('Envoyer')
   })
 
   it('prefers the string the game pushed for the running language', () => {
-    applyTranslations(locale.current, { chat_close: 'Quitter' })
+    applyTranslations(locale.current, { chat_send: 'Poster' })
 
-    expect(m.chat_close()).toBe('Quitter')
+    expect(m.chat_send()).toBe('Poster')
   })
 
   it('fills placeholders in a pushed string', () => {
@@ -26,10 +26,10 @@ describe('i18n', () => {
   })
 
   it('switches the language along with the strings', () => {
-    applyTranslations('en', { chat_close: 'Leave' })
+    applyTranslations('en', { chat_send: 'Post' })
 
     expect(locale.current).toBe('en')
-    expect(m.chat_close()).toBe('Leave')
+    expect(m.chat_send()).toBe('Post')
     expect(m.chat_empty()).toBe('No messages yet.')
   })
 })
