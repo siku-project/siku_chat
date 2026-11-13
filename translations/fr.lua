@@ -3,6 +3,9 @@ return {
   chat_passive_enabled = 'Messages entrants affichés.',
   chat_passive_disabled = 'Messages entrants masqués.',
   chat_staffchat_description = 'Rejoindre le canal staff.',
+  chat_announce_description = 'Affiche un message du serveur dans le chat de tous les joueurs.',
+  chat_announce_message_help = 'Le message à afficher',
+  chat_announce_console_only = 'Cette commande ne s’utilise que depuis la console du serveur.',
   chat_keybind_open = 'Ouvrir le chat',
   chat_keybind_passive = 'Afficher ou masquer les messages entrants',
 
