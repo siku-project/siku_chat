@@ -108,6 +108,11 @@ export const DEMO_MESSAGES: ChatMessageInput[] = [
     text: 'Événement ce soir à 21 h 30 sur la place centrale.',
   },
   {
+    type: 'staff',
+    timestamp: at(21, 20),
+    text: 'Merci de rester en RP sur la place pendant l’événement.',
+  },
+  {
     type: 'player',
     timestamp: at(21, 20),
     author: 'Tom Rivera',

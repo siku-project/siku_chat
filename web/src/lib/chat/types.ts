@@ -2,6 +2,7 @@ export const CHANNELS = ['public', 'staff'] as const
 export const MESSAGE_TYPES = [
   'player',
   'server',
+  'staff',
   'system',
   'info',
   'success',

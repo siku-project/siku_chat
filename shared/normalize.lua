@@ -4,6 +4,7 @@ local ICON_PATTERN <const> = '^[%w_%-]+$'
 
 local EXPORT_TYPES <const> = {
   server = true,
+  staff = true,
   system = true,
   info = true,
   success = true,
@@ -14,6 +15,7 @@ local EXPORT_TYPES <const> = {
 local MESSAGE_TYPES <const> = {
   player = true,
   server = true,
+  staff = true,
   system = true,
   info = true,
   success = true,
