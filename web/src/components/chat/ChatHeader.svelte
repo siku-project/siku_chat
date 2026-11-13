@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Badge, Hint, Icon } from '@siku/ui'
+  import { Badge, Icon } from '@siku/ui'
   import { m } from '@/lib/i18n.svelte'
 
   let { staff }: { staff: boolean } = $props()
@@ -13,7 +13,4 @@
   {#if staff}
     <Badge tone="live" label={m.chat_staff_badge()} />
   {/if}
-  <div class="ml-auto">
-    <Hint keys={['Esc']} label={staff ? m.chat_back() : m.chat_close()} />
-  </div>
 </div>
