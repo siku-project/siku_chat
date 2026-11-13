@@ -369,7 +369,6 @@ html[data-density='compact'] .chat-log {
 .chat-scrim--top-left {
   top: 0;
   left: 0;
-  -webkit-mask-image: radial-gradient(100% 100% at 0% 0%, black, black 20%, transparent 95%);
   mask-image: radial-gradient(100% 100% at 0% 0%, black, black 20%, transparent 95%);
 }
 
@@ -378,14 +377,12 @@ html[data-density='compact'] .chat-log {
   left: 50%;
   width: 60vw;
   transform: translateX(-50%);
-  -webkit-mask-image: radial-gradient(50% 100% at 50% 0%, black, black 20%, transparent 95%);
   mask-image: radial-gradient(50% 100% at 50% 0%, black, black 20%, transparent 95%);
 }
 
 .chat-scrim--top-right {
   top: 0;
   right: 0;
-  -webkit-mask-image: radial-gradient(100% 100% at 100% 0%, black, black 20%, transparent 95%);
   mask-image: radial-gradient(100% 100% at 100% 0%, black, black 20%, transparent 95%);
 }
 
@@ -394,7 +391,6 @@ html[data-density='compact'] .chat-log {
   left: 0;
   height: 70vh;
   transform: translateY(-50%);
-  -webkit-mask-image: radial-gradient(100% 50% at 0% 50%, black, black 20%, transparent 95%);
   mask-image: radial-gradient(100% 50% at 0% 50%, black, black 20%, transparent 95%);
 }
 
@@ -404,7 +400,6 @@ html[data-density='compact'] .chat-log {
   width: 60vw;
   height: 60vh;
   transform: translate(-50%, -50%);
-  -webkit-mask-image: radial-gradient(50% 50% at 50% 50%, black, black 20%, transparent 95%);
   mask-image: radial-gradient(50% 50% at 50% 50%, black, black 20%, transparent 95%);
 }
 
@@ -413,14 +408,12 @@ html[data-density='compact'] .chat-log {
   right: 0;
   height: 70vh;
   transform: translateY(-50%);
-  -webkit-mask-image: radial-gradient(100% 50% at 100% 50%, black, black 20%, transparent 95%);
   mask-image: radial-gradient(100% 50% at 100% 50%, black, black 20%, transparent 95%);
 }
 
 .chat-scrim--bottom-left {
   bottom: 0;
   left: 0;
-  -webkit-mask-image: radial-gradient(100% 100% at 0% 100%, black, black 20%, transparent 95%);
   mask-image: radial-gradient(100% 100% at 0% 100%, black, black 20%, transparent 95%);
 }
 
@@ -429,13 +422,11 @@ html[data-density='compact'] .chat-log {
   left: 50%;
   width: 60vw;
   transform: translateX(-50%);
-  -webkit-mask-image: radial-gradient(50% 100% at 50% 100%, black, black 20%, transparent 95%);
   mask-image: radial-gradient(50% 100% at 50% 100%, black, black 20%, transparent 95%);
 }
 
 .chat-scrim--bottom-right {
   right: 0;
   bottom: 0;
-  -webkit-mask-image: radial-gradient(100% 100% at 100% 100%, black, black 20%, transparent 95%);
   mask-image: radial-gradient(100% 100% at 100% 100%, black, black 20%, transparent 95%);
 }
