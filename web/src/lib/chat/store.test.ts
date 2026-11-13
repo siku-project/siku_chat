@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { suggestionsFor } from './commands'
 import { store } from './store.svelte'
 
 const action = (name: string) => `siku_chat:nui:${name}`
@@ -103,6 +104,33 @@ describe('store', () => {
     expect(store.commands.map((command) => command.name)).toEqual(['do'])
 
     store.unregisterCommand('do')
+  })
+
+  it('offers every suggestion in the staff channel, whatever flag the game set', () => {
+    store.applyMessage({ action: action('addSuggestion'), suggestion: { name: 'me' } })
+    store.applyMessage({
+      action: action('addSuggestion'),
+      suggestion: { name: 'staffchat', staff: true },
+    })
+    store.applyMessage({
+      action: action('addSuggestion'),
+      suggestion: { name: 'kick', staff: false },
+    })
+
+    const names = store.commands.map((command) => command.name)
+
+    store.applyMessage({ action: action('setStaffMode'), enabled: true })
+
+    expect(store.mode).toBe('staff')
+    expect(suggestionsFor('/', '/', store.commands).map((entry) => entry.command.name)).toEqual(
+      names,
+    )
+    expect(store.commands.some((command) => 'staff' in command)).toBe(false)
+
+    store.applyMessage({ action: action('setStaffMode'), enabled: false })
+    store.unregisterCommand('me')
+    store.unregisterCommand('staffchat')
+    store.unregisterCommand('kick')
   })
 
   it('keeps only the typed configuration fields', () => {
