@@ -215,7 +215,7 @@
           />
           {#if keyboard}
             <div class="chat-hints">
-              <Hint keys={['Entrée']} label={m.chat_send()} />
+              <Hint keys={[m.chat_key_enter()]} label={m.chat_send()} />
               <Hint keys={['↑', '↓']} label={m.chat_history()} />
             </div>
           {/if}
