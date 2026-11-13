@@ -156,6 +156,13 @@ The core pushes a player's suggestions when their character loads and whenever t
 
 The cooldown only applies to messages: a command is never delayed, on the server nor in the interface.
 
+| Command | Where | Effect |
+|---|---|---|
+| `announce <message>` | Server console only | Shows a server message, as an `info` line with the server icon, in the chat of every player. It is kept for the replay like any public message. |
+| `/staffchat` | Players with `chat.staff.join` | Opens the chat in the staff channel. |
+
+`announce` carries the permission `chat.announce` so that players do not see its suggestion; a player who runs it anyway is refused and the attempt is recorded.
+
 ## Staff channel
 
 - Access needs the RBAC permission **`chat.staff.join`** on the player's active character.
@@ -167,7 +174,7 @@ The cooldown only applies to messages: a command is never delayed, on the server
 
 | Event | Level | When |
 |---|---|---|
-| `chat.message_rejected` | debug, warn for `staff_denied` | A message is refused: `reason` is `text_invalid`, `too_long`, `cooldown`, `hook` or `staff_denied`. |
+| `chat.message_rejected` | debug, warn for `staff_denied` and `console_only` | A message is refused: `reason` is `text_invalid`, `too_long`, `cooldown`, `hook`, `staff_denied` or `console_only`. |
 | `chat.export_invalid` | warn | A resource called an export with a wrong argument: `export` and `reason`. |
 | `chat.hook_rejected`, `chat.hook_failed` | warn, error | A hook registration is refused, or a hook raised. |
 | `chat.prefix_invalid` | warn | The configured prefix is not allowed and `/` is used. |
