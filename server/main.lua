@@ -169,7 +169,7 @@ local function addMessage(target, data)
   end
 
   if data.type ~= nil and not ChatNormalize.IsExportType(data.type) then
-    return refuse('type_invalid', ('type %s is not server, system, info, success, warning or error'):format(tostring(data.type)))
+    return refuse('type_invalid', ('type %s is not server, staff, system, info, success, warning or error'):format(tostring(data.type)))
   end
 
   if data.channel ~= nil and data.channel ~= ChatNormalize.PUBLIC_CHANNEL then
@@ -268,30 +268,30 @@ local function removeSuggestion(target, name)
 end
 
 Siku.command.register('announce', function(src, args)
-  if src ~= CONSOLE_SOURCE then
-    Siku.log.warn('chat.message_rejected', ('%s used /announce from the game, it only runs from the console'):format(GetPlayerName(tostring(src)) or src), {
-      channel = ChatNormalize.PUBLIC_CHANNEL,
-      reason = 'console_only',
-    }, { outcome = 'denied', entities = { playerEntity(src) } })
-    Siku.notification.show(src, {
-      type = 'error',
-      title = '/announce',
-      description = T('chat_announce_console_only'),
-      duration = ERROR_NOTIFICATION_DURATION,
-    })
-    return
-  end
-
+  local fromConsole <const> = src == CONSOLE_SOURCE
   local text <const> = ChatNormalize.Sanitize(ChatNormalize.Trim(args.message))
   local length <const> = ChatNormalize.Length(text)
 
   if not length or length == 0 or length > ChatConfig.maxMessageLength then
-    Siku.print.warn(('/announce: the message must hold 1 to %d characters'):format(ChatConfig.maxMessageLength))
+    if fromConsole then
+      Siku.print.warn(('/announce: the message must hold 1 to %d characters'):format(ChatConfig.maxMessageLength))
+    else
+      Siku.notification.show(src, {
+        type = 'error',
+        title = '/announce',
+        description = T('chat_announce_length', ChatConfig.maxMessageLength),
+        duration = ERROR_NOTIFICATION_DURATION,
+      })
+    end
+
     return
   end
 
-  addMessage(EVERYONE, { content = text, type = 'server' })
-  Siku.print.info(('/announce: shown to everyone: %s'):format(text))
+  addMessage(EVERYONE, { content = text, type = fromConsole and 'server' or 'staff' })
+
+  if fromConsole then
+    Siku.print.info(('/announce: shown to everyone: %s'):format(text))
+  end
 end, {
   description = T('chat_announce_description'),
   permission = 'chat.announce',

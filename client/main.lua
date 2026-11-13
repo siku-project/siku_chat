@@ -92,7 +92,7 @@ local function addMessage(data)
   end
 
   if data.type ~= nil and not ChatNormalize.IsExportType(data.type) then
-    return refuse('type_invalid', ('type %s is not server, system, info, success, warning or error'):format(tostring(data.type)))
+    return refuse('type_invalid', ('type %s is not server, staff, system, info, success, warning or error'):format(tostring(data.type)))
   end
 
   if data.channel ~= nil and data.channel ~= ChatNormalize.PUBLIC_CHANNEL then
