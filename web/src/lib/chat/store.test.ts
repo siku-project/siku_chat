@@ -113,6 +113,8 @@ describe('store', () => {
         inputMode: 'touch',
         maxMessageLength: '12',
         allowMessages: false,
+        position: 'bottom-center',
+        passivePosition: 'middle',
       },
     })
 
@@ -120,7 +122,9 @@ describe('store', () => {
     expect(store.config.inputMode).toBe('keyboard')
     expect(store.config.maxMessageLength).toBe(256)
     expect(store.config.allowMessages).toBe(false)
+    expect(store.config.position).toBe('bottom-center')
+    expect(store.config.passivePosition).toBe('top-left')
 
-    store.setConfig({ commandPrefix: '/', allowMessages: true })
+    store.setConfig({ commandPrefix: '/', allowMessages: true, position: 'top-left' })
   })
 })

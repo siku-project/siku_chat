@@ -1,12 +1,12 @@
 <script lang="ts">
   import { fade } from 'svelte/transition'
-  import { HudAnchor } from '@siku/ui'
+  import ChatAnchor from '@/components/chat/ChatAnchor.svelte'
   import { store } from '@/lib/chat/store.svelte'
 </script>
 
 {#if !store.visible && store.passiveMessages.length > 0}
-  <HudAnchor corner="top-left">
-    <div class="chat-passive" aria-live="polite">
+  <ChatAnchor position={store.config.passivePosition}>
+    <div class="chat-passive chat-passive--{store.config.passivePosition}" aria-live="polite">
       {#each store.passiveMessages as message (message.id)}
         <div class="chat-passive__row t-body-sm" transition:fade={{ duration: 200 }}>
           {#if message.author}
@@ -18,5 +18,5 @@
         </div>
       {/each}
     </div>
-  </HudAnchor>
+  </ChatAnchor>
 {/if}
