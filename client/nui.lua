@@ -12,14 +12,19 @@ function Nui.send(name, payload)
   SendNUIMessage(message)
 end
 
-function Nui.show()
-  SikuUI.open()
-  Nui.send('setVisible', { visible = true })
+---Opens the chat and gives it the keyboard, with the cursor only when asked.
+---@param cursor boolean Whether the mouse cursor is shown.
+function Nui.show(cursor)
+  SetNuiFocus(true, cursor == true)
+  SikuUI.sendEnv()
+  SikuUI.focused = true
+  Nui.send('open')
 end
 
 function Nui.hide()
-  Nui.send('setVisible', { visible = false })
-  SikuUI.close()
+  SetNuiFocus(false, false)
+  SikuUI.focused = false
+  Nui.send('hide')
 end
 
 ---@param name string The callback name, without the resource prefix.
@@ -41,16 +46,3 @@ function Nui.reply(name, handler)
     cb(handler(type(data) == 'table' and data or {}) or {})
   end)
 end
-
-Nui.reply('ready', function()
-  return {
-    locale = {
-      language = TranslationConfig.language,
-      translations = { web = Siku.locale.translations().web },
-    },
-  }
-end)
-
-Nui.on('close', function()
-  Nui.hide()
-end)
