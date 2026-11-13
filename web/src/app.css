@@ -364,12 +364,22 @@ html[data-density='compact'] .chat-log {
   background: var(--bg-void);
   opacity: var(--opacity-scrim-heavy);
   pointer-events: none;
+  --chat-scrim-stops:
+    black 0%, black 15%, color-mix(in srgb, black 97.2%, transparent) 23.5%,
+    color-mix(in srgb, black 89.6%, transparent) 32%,
+    color-mix(in srgb, black 78.4%, transparent) 40.5%,
+    color-mix(in srgb, black 64.8%, transparent) 49%,
+    color-mix(in srgb, black 50%, transparent) 57.5%,
+    color-mix(in srgb, black 35.2%, transparent) 66%,
+    color-mix(in srgb, black 21.6%, transparent) 74.5%,
+    color-mix(in srgb, black 10.4%, transparent) 83%,
+    color-mix(in srgb, black 2.8%, transparent) 91.5%, transparent 100%;
 }
 
 .chat-scrim--top-left {
   top: 0;
   left: 0;
-  mask-image: radial-gradient(100% 100% at 0% 0%, black, black 20%, transparent 95%);
+  mask-image: radial-gradient(100% 100% at 0% 0%, var(--chat-scrim-stops));
 }
 
 .chat-scrim--top-center {
@@ -377,13 +387,13 @@ html[data-density='compact'] .chat-log {
   left: 50%;
   width: 60vw;
   transform: translateX(-50%);
-  mask-image: radial-gradient(50% 100% at 50% 0%, black, black 20%, transparent 95%);
+  mask-image: radial-gradient(50% 100% at 50% 0%, var(--chat-scrim-stops));
 }
 
 .chat-scrim--top-right {
   top: 0;
   right: 0;
-  mask-image: radial-gradient(100% 100% at 100% 0%, black, black 20%, transparent 95%);
+  mask-image: radial-gradient(100% 100% at 100% 0%, var(--chat-scrim-stops));
 }
 
 .chat-scrim--left {
@@ -391,7 +401,7 @@ html[data-density='compact'] .chat-log {
   left: 0;
   height: 70vh;
   transform: translateY(-50%);
-  mask-image: radial-gradient(100% 50% at 0% 50%, black, black 20%, transparent 95%);
+  mask-image: radial-gradient(100% 50% at 0% 50%, var(--chat-scrim-stops));
 }
 
 .chat-scrim--center {
@@ -400,7 +410,7 @@ html[data-density='compact'] .chat-log {
   width: 60vw;
   height: 60vh;
   transform: translate(-50%, -50%);
-  mask-image: radial-gradient(50% 50% at 50% 50%, black, black 20%, transparent 95%);
+  mask-image: radial-gradient(50% 50% at 50% 50%, var(--chat-scrim-stops));
 }
 
 .chat-scrim--right {
@@ -408,13 +418,13 @@ html[data-density='compact'] .chat-log {
   right: 0;
   height: 70vh;
   transform: translateY(-50%);
-  mask-image: radial-gradient(100% 50% at 100% 50%, black, black 20%, transparent 95%);
+  mask-image: radial-gradient(100% 50% at 100% 50%, var(--chat-scrim-stops));
 }
 
 .chat-scrim--bottom-left {
   bottom: 0;
   left: 0;
-  mask-image: radial-gradient(100% 100% at 0% 100%, black, black 20%, transparent 95%);
+  mask-image: radial-gradient(100% 100% at 0% 100%, var(--chat-scrim-stops));
 }
 
 .chat-scrim--bottom-center {
@@ -422,11 +432,11 @@ html[data-density='compact'] .chat-log {
   left: 50%;
   width: 60vw;
   transform: translateX(-50%);
-  mask-image: radial-gradient(50% 100% at 50% 100%, black, black 20%, transparent 95%);
+  mask-image: radial-gradient(50% 100% at 50% 100%, var(--chat-scrim-stops));
 }
 
 .chat-scrim--bottom-right {
   right: 0;
   bottom: 0;
-  mask-image: radial-gradient(100% 100% at 100% 100%, black, black 20%, transparent 95%);
+  mask-image: radial-gradient(100% 100% at 100% 100%, var(--chat-scrim-stops));
 }
