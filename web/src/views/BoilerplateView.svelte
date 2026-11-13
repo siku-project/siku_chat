@@ -5,23 +5,23 @@
   import DevFab from '@/components/boilerplate/DevFab.svelte'
   import DevTopBar from '@/components/boilerplate/DevTopBar.svelte'
   import DevViewSelector from '@/components/boilerplate/DevViewSelector.svelte'
-  import MainView from '@/views/MainView.svelte'
+  import ChatView from '@/views/ChatView.svelte'
 
   const NONE = 'none'
   const STORAGE_KEY = 'siku_chat:dev:view'
 
   /** Every interface of the resource, by the name the selector shows. */
   const views: Record<string, Component> = {
-    Main: MainView,
+    Chat: ChatView,
   }
 
-  /** The view asked for in the URL wins, then the last one picked, then none. */
+  /** The view asked for in the URL wins, then the last one picked, then the first one. */
   const initialView = (): string => {
     const fromUrl = new URLSearchParams(window.location.search).get('view')
     const fromStorage = window.localStorage.getItem(STORAGE_KEY)
-    const wanted = fromUrl ?? fromStorage ?? NONE
+    const wanted = fromUrl ?? fromStorage ?? 'Chat'
 
-    return wanted in views ? wanted : NONE
+    return wanted in views || wanted === NONE ? wanted : 'Chat'
   }
 
   let currentView = $state(initialView())
