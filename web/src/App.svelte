@@ -2,11 +2,12 @@
   import { onMount } from 'svelte'
   import type { Component } from 'svelte'
   import { Toaster } from '@siku/ui'
-  import { app } from '@/lib/app.svelte'
+  import { game } from '@/lib/chat/bridge'
+  import { store } from '@/lib/chat/store.svelte'
   import { applyTranslations } from '@/lib/i18n.svelte'
   import { locale } from '@/lib/locale.svelte'
-  import { RESOURCE, sendNuiCallback } from '@/lib/nui'
-  import MainView from '@/views/MainView.svelte'
+  import { RESOURCE } from '@/lib/nui'
+  import ChatView from '@/views/ChatView.svelte'
 
   interface LocalePayload {
     language?: string
@@ -15,13 +16,11 @@
 
   interface ReadyResponse {
     locale?: LocalePayload
-    visible?: boolean
   }
 
   interface NuiMessage {
     action?: string
     locale?: LocalePayload
-    visible?: boolean
   }
 
   let Shell = $state<Component | null>(null)
@@ -48,30 +47,25 @@
       return
     }
 
-    if (data?.action === `${RESOURCE}:nui:setVisible`) {
-      app.setVisible(data.visible === true)
-    }
+    store.applyMessage(data)
   }
 
   onMount(() => {
     window.addEventListener('message', handleMessage)
 
-    void sendNuiCallback<ReadyResponse>('ready').then((answer) => {
-      if (!answer) {
-        return
-      }
-
-      applyLocale(answer.locale)
-
-      if (answer.visible !== undefined) {
-        app.setVisible(answer.visible)
+    void (game.ready() as Promise<ReadyResponse | null>).then((answer) => {
+      if (answer) {
+        applyLocale(answer.locale)
       }
     })
 
     if (import.meta.env.DEV) {
-      void import('@/views/BoilerplateView.svelte').then((module) => {
-        Shell = module.default
-      })
+      void Promise.all([import('@/lib/chat/mock'), import('@/views/BoilerplateView.svelte')]).then(
+        ([mock, module]) => {
+          mock.loadMocks()
+          Shell = module.default
+        },
+      )
     }
 
     return () => window.removeEventListener('message', handleMessage)
@@ -82,7 +76,7 @@
   {#if Shell}
     <Shell />
   {:else if !import.meta.env.DEV}
-    <MainView />
+    <ChatView />
   {/if}
 {/key}
 

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Button, Modal, Segmented, Tooltip } from '@siku/ui'
-  import { app } from '@/lib/app.svelte'
+  import { simulateIncoming } from '@/lib/chat/mock'
+  import { store } from '@/lib/chat/store.svelte'
   import { locale } from '@/lib/locale.svelte'
 
   let open = $state(false)
@@ -28,16 +29,74 @@
     </p>
 
     <div class="sk-field">
-      <span class="sk-field__label">Interface</span>
+      <span class="sk-field__label">Chat</span>
       <Segmented
-        label="Interface"
+        label="Chat"
         block
-        value={app.visible ? 'shown' : 'hidden'}
+        value={store.visible ? 'open' : 'closed'}
         options={[
-          { value: 'shown', label: 'Shown' },
-          { value: 'hidden', label: 'Hidden' },
+          { value: 'open', label: 'Open' },
+          { value: 'closed', label: 'Closed' },
         ]}
-        onchange={(value) => app.setVisible(value === 'shown')}
+        onchange={(value) => (value === 'open' ? store.show() : store.hide())}
+      />
+      <span class="sk-field__help">Closed, incoming messages show in the passive overlay.</span>
+    </div>
+
+    <div class="sk-field">
+      <span class="sk-field__label">Channel</span>
+      <Segmented
+        label="Channel"
+        block
+        value={store.mode}
+        options={[
+          { value: 'public', label: 'Public' },
+          { value: 'staff', label: 'Staff' },
+        ]}
+        onchange={(value) => store.setMode(value === 'staff' ? 'staff' : 'public')}
+      />
+    </div>
+
+    <div class="sk-field">
+      <span class="sk-field__label">Input</span>
+      <Segmented
+        label="Input"
+        block
+        value={store.config.inputMode}
+        options={[
+          { value: 'keyboard', label: 'Keyboard' },
+          { value: 'mouse', label: 'Mouse' },
+        ]}
+        onchange={(value) =>
+          store.setConfig({ inputMode: value === 'mouse' ? 'mouse' : 'keyboard' })}
+      />
+    </div>
+
+    <div class="sk-field">
+      <span class="sk-field__label">Messages</span>
+      <Segmented
+        label="Messages"
+        block
+        value={store.config.allowMessages ? 'all' : 'commands'}
+        options={[
+          { value: 'all', label: 'Allowed' },
+          { value: 'commands', label: 'Commands only' },
+        ]}
+        onchange={(value) => store.setConfig({ allowMessages: value === 'all' })}
+      />
+    </div>
+
+    <div class="sk-field">
+      <span class="sk-field__label">Passive overlay</span>
+      <Segmented
+        label="Passive overlay"
+        block
+        value={store.config.passiveEnabled ? 'on' : 'off'}
+        options={[
+          { value: 'on', label: 'Shown' },
+          { value: 'off', label: 'Hidden' },
+        ]}
+        onchange={(value) => store.setConfig({ passiveEnabled: value === 'on' })}
       />
     </div>
 
@@ -51,6 +110,8 @@
         onchange={(value) => locale.set(value)}
       />
     </div>
+
+    <Button variant="secondary" icon="msg" onclick={simulateIncoming}>Incoming message</Button>
   </div>
 
   {#snippet actions()}
