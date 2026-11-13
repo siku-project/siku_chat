@@ -13,6 +13,7 @@ return {
     ['chat_title'] = 'Chat',
     ['chat_staff_title'] = 'Canal staff',
     ['chat_staff_badge'] = 'Staff',
+    ['chat_server_badge'] = 'Serveur',
     ['chat_placeholder'] = 'Écrire un message…',
     ['chat_staff_placeholder'] = 'Message au staff…',
     ['chat_empty'] = 'Aucun message pour l’instant.',
