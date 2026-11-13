@@ -10,6 +10,7 @@
       "devDependencies": {
         "@eslint/js": "^10.0.1",
         "@inlang/paraglide-js": "^3.2.2",
+        "@siku/ui": "git+https://github.com/siku-project/siku-ui.git#v1.20.0",
         "@sveltejs/vite-plugin-svelte": "^7.3.1",
         "@tsconfig/svelte": "^5.0.9",
         "@types/node": "^26.6.6",
@@ -18,7 +19,6 @@
         "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-oxlint": "^1.93.0",
         "eslint-plugin-svelte": "^3.24.1",
-        "@siku/ui": "git+https://github.com/siku-project/siku-ui.git#v1.19.0",
         "globals": "^17.14.0",
         "jiti": "^2.7.0",
         "jsdom": "^31.0.1",
@@ -246,7 +246,7 @@
 
     "@rolldown/pluginutils": ["@rolldown/pluginutils@1.1.1", "", {}, "sha512-glFIJDvLNDtJhT9qrMFWLPbvS+skxgt4L0K8Ei2YtnhPysAJnsI7nyxSJxKj4ADeKX0OLjC4ntRkwpLOoS3rwA=="],
 
-    "@siku/ui": ["@siku/ui@github:siku-project/siku-ui#ab6b0ea", { "peerDependencies": { "svelte": "^5.20.0" }, "bin": { "siku": "./bin/siku.mjs" } }, "siku-project-siku-ui-ab6b0ea", "sha512-FFuWYlp63Ni0viboIQzfadmDTZ45aSzPgnOHc1IqoiIsQCrA9bh5aYlIVzJzcbhmmrG3vDoD0RQh+uM1AtxOoQ=="],
+    "@siku/ui": ["@siku/ui@github:siku-project/siku-ui#9b216b9", { "peerDependencies": { "svelte": "^5.20.0" }, "bin": { "siku": "./bin/siku.mjs" } }, "siku-project-siku-ui-9b216b9", "sha512-4xM1EVhSyaWOTbY42sZgk4j4qyf1n9hlXHL98HKIn1fL7tvxnvHUVOXVFyhcR6OnbNuefywtd/QBP6fuTwMlHg=="],
 
     "@sinclair/typebox": ["@sinclair/typebox@0.31.30", "", {}, "sha512-MGsM7bVmHg3sUKCphlu3SGQ+T+5JTbygZWYArfKQCW5anJeACHeqLhcnf+R7XlCWZ+QR3C8JTBx3kCKJTN69ow=="],
 
