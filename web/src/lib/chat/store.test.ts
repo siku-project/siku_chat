@@ -106,6 +106,13 @@ describe('store', () => {
     store.unregisterCommand('do')
   })
 
+  it('keeps the server type of an announcement and shows it while the chat is closed', () => {
+    const message = store.addMessage({ text: 'Restart in ten minutes', type: 'server' })
+
+    expect(message.type).toBe('server')
+    expect(store.passiveMessages.map((entry) => entry.type)).toEqual(['server'])
+  })
+
   it('offers every suggestion in the staff channel, whatever flag the game set', () => {
     store.applyMessage({ action: action('addSuggestion'), suggestion: { name: 'me' } })
     store.applyMessage({

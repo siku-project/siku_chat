@@ -169,7 +169,7 @@ local function addMessage(target, data)
   end
 
   if data.type ~= nil and not ChatNormalize.IsExportType(data.type) then
-    return refuse('type_invalid', ('type %s is not system, info, success, warning or error'):format(tostring(data.type)))
+    return refuse('type_invalid', ('type %s is not server, system, info, success, warning or error'):format(tostring(data.type)))
   end
 
   if data.channel ~= nil and data.channel ~= ChatNormalize.PUBLIC_CHANNEL then
@@ -290,7 +290,7 @@ Siku.command.register('announce', function(src, args)
     return
   end
 
-  addMessage(EVERYONE, { content = text, type = 'info', icon = 'server' })
+  addMessage(EVERYONE, { content = text, type = 'server' })
   Siku.print.info(('/announce: shown to everyone: %s'):format(text))
 end, {
   description = T('chat_announce_description'),
