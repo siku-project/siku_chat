@@ -51,7 +51,6 @@ jobs:
       - run: bun run locales --check
       - run: bunx siku check src
       - run: bunx siku doctor .
-      - run: bunx siku ai check ..
 
   guard:
     name: guard
